@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
   <title>Jak3mb</title>
   <meta content="" name="descriptison">
@@ -86,7 +87,23 @@
         
         <main id="main">
          <div class="row" data-aos="fade-in">
-       <iframe width="600" height="340" src="https://www.youtube.com/embed/+lastest?list=UCZ5zbfbzWqtE5g7fjs92lyQ" frameborder="0" allowfullscreen></iframe><br/>
+      <div id="static_video"></div>
+    <script type="text/javascript">
+        function showLatestVid(response) {
+            if(response.data && response.data.items) {
+                var items = response.data.items;
+                if(items.length>0) {
+                    var item = items[0];
+                    var videoid = "http://www.youtube.com/embed/"+item.id;
+                    console.log("Latest ID: '"+videoid+"'");
+                    var video = "<iframe width='300' height='225' src='"+videoid+"' frameborder='0' allowfullscreen></iframe>"; 
+                    jQuery('#static_video').html(video);
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript" src="https://gdata.youtube.com/feeds/api/channel/UCZ5zbfbzWqtE5g7fjs92lyQ/uploads?max-results=1&orderby=published&v=2&alt=jsonc&callback=
+showLatestVid"></script>
       </main>
            
     </section><!-- End Video Section -->
